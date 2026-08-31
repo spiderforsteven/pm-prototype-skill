@@ -28,7 +28,7 @@ metadata:
   ↓
 ③ 共识确认   —— 复述最终理解，用户确认后才进入设计
   ↓
-④ 执行设计   —— 加载设计规范 → L1线框图 / L2高保真 / L3评审报告
+④ 执行设计   —— 先问设计token（用户自备优先）→ 无则用预置 → L1线框图 / L2高保真 / L3评审报告
   ↓
 ⑤ 交付       —— 中文文件名 + hermes_delivery/ + Pages 部署（可选）
 ```
@@ -85,13 +85,17 @@ metadata:
 ## 4. 澄清节奏（用户偏好，必须遵守）
 
 - **一次一问**：绝不一次抛问题清单。答完一个再问下一个。
-- 用 clarify 工具的 choices 渲染选项（可点击），不手打列表。
+- 用所在 agent 支持的交互方式提问（Hermes 下用 clarify 可点击选项；其他 agent 用单条消息一问）——绝不一次抛问题清单。
 - 优先级：先问影响设计方向的问题（入口/跳转/模式结构/数据归属），再问细节（文案/配色）。
 - 用户中途补充信息 = 修正理解，更新理解后继续，**不重新规划、不否定用户**。
 
 ## 5. 设计执行
 
-1. **加载设计规范**：Maygrove → `maygrove-design-system`；其他品牌 → 先向用户收集品牌 token（配色/字体/圆角），禁默认沿用历史项目配色。
+1. **设计 token 询问协议（每次必做）**：先问用户「你有自己的设计 token 吗？」——
+   - ① 有：解析用户 token（粘贴值 / 上传文件 / 品牌官网提取配色）并**全量替换**预置值
+   - ② 没有：加载预置 `references/design-tokens.md`，交付时注明「默认 token」
+   - 优先顺序：**用户 token > 预置**。Maygrove 项目可关联 `maygrove-design-system`，同样遵循此询问协议。
+   - 换 token 后必须校验：主色与文字对比度 ≥ WCAG AA（4.5:1），深浅双主题都过。
 2. **三档交付**（按用户需求）：
    - L1 低保真线框图：`maygrove-wireframe` 生成 .excalidraw（可二次编辑）
    - L2 高保真可交互原型：HTML（token 落地、深浅双主题、英文/中文按用户、全状态）
@@ -109,7 +113,20 @@ metadata:
 - ❌ 把设备参数与模式混为一谈而不确认数据归属
 - ❌ 术语不一致不指出（同一概念多个名字 = 认知负担）
 
-## 7. 参考
+## 7. 主流 AI Agent 适配
 
-- 完整问题库：`references/问题库全表.md`（分场景 50+ 问 + 对抗式/断点/友好性清单 + 苏格拉底句式）
-- 使用说明（可分发）：`hermes_delivery/PM-Prototype-Skill使用说明.md`
+本 skill 不绑定单一 agent。协议本体（澄清 → 设计）与文件结构通用，适配方式见 `AGENTS.md`：
+
+| Agent | 接入方式 |
+|---|---|
+| Hermes Agent | 复制到 `~/.hermes/skills/`，工具自动发现 |
+| Cursor | 根目录放 `.cursor/rules/` 或读 AGENTS.md |
+| Claude Code | `CLAUDE.md` 引用 AGENTS.md 协议 |
+| Codex / Cline | 读 AGENTS.md，按提示词加载 |
+
+## 8. 参考
+
+- 完整问题库：`references/问题库全表.md`（分场景 60+ 问 + 对抗式/断点/友好性清单 + 苏格拉底句式）
+- 预置设计 token：`references/design-tokens.md`（默认值，用户可上传自定义 token 覆盖）
+- 主流 AI agent 适配：`AGENTS.md`
+- 使用说明（可分发）：`docs/使用说明.md`

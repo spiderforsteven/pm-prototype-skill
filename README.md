@@ -4,77 +4,98 @@
 
 <div align="center">
 
-![version](https://img.shields.io/badge/version-v1.0.0-0B1E19?style=flat-square)
+![version](https://img.shields.io/badge/version-v1.1.0-0B1E19?style=flat-square)
 ![license](https://img.shields.io/badge/license-MIT-5CE6A5?style=flat-square)
-![platform](https://img.shields.io/badge/platform-Hermes%20Agent-FFB454?style=flat-square)
-![lang](https://img.shields.io/badge/docs-EN%20%2B%20ZH-7DB9FF?style=flat-square)
+![platform](https://img.shields.io/badge/platform-AI%20Agent-FFB454?style=flat-square)
+![docs](https://img.shields.io/badge/docs-中文-7DB9FF?style=flat-square)
 
 </div>
 
 ---
 
-## Why this exists
+## 这是什么
 
-LLM-driven prototype work fails most often at the **understanding** stage, not the rendering stage. Real incidents that shaped this skill:
+面向**产品经理**的交互原型设计技能（AI Agent 工作流）：你通过「设计软件 MCP 链接 / 设计稿截图 + 优化诉求 / 纯文字诉求」发起需求，AI 按强制协议执行——**先多轮澄清理解，再基于设计 token 出稿**。
 
-| Incident | What went wrong |
+> 核心铁律：**未充分理解交互细节前，禁止出稿。** 宁可多问三轮，不可早出一版错的。
+
+## 为什么需要它
+
+LLM 驱动的原型设计，失败往往出在**理解阶段**，而不是渲染阶段。以下是真实事故：
+
+| 事故 | 问题 |
 |---|---|
-| A mode-switch card looked like a plain settings row | The agent didn't realize "Smart care" was the entry to 4 planting strategies |
-| A manual mode was nested inside Device Settings | Misread as a sibling mode instead of a hidden advanced mode |
-| Device telemetry mixed into the mode card | Water level, light state are **objective state** — they should be an independent always-visible block, not mode attributes |
-| Two names for one concept | "AI mode" vs "Smart care" on the same screen = cognitive load |
+| 模式切换卡片看起来像普通设置行 | AI 没意识到「Smart care」是 4 个种植策略的入口 |
+| 手动模式藏在设备设置里 | 被误读为平级模式，而非隐藏的进阶模式 |
+| 设备参数混进模式卡片 | 水位、光照是**客观状态**，应独立常显，而非模式属性 |
+| 一个概念两个名字 | 「AI mode」和「Smart care」同屏 = 认知负担 |
 
-The fix, encoded as a mandatory protocol: **restate → clarify → confirm → design**.
+解法被固化为强制协议：**复述 → 澄清 → 确认 → 设计**。
 
-## The 5-step workflow
+## 5 步流程
 
-| Step | Name | What happens |
+| 步骤 | 名称 | 内容 |
 |---|---|---|
-| 01 | **Restate** | Output page structure + interaction points + a list of open questions. Never skipped. |
-| 02 | **Clarify** | One question at a time, driven by a 60+ question bank plus four questioning philosophies. |
-| 03 | **Confirm** | The PM confirms the final understanding. No confirmation, no design. |
-| 04 | **Design** | Load the brand design-token system, then ship wireframe / hi-fi / review report. |
-| 05 | **Deliver** | Editable wireframes or deployable interactive HTML, verified in both themes. |
+| 01 | **复述理解** | 输出页面结构 + 交互要点 + 不确定项清单（永不跳过） |
+| 02 | **逐项澄清** | 一次一问，由 60+ 问题库 + 四种提问哲学驱动 |
+| 03 | **共识确认** | 你确认最终理解后，才开始设计 |
+| 04 | **执行设计** | **先问设计 token**（你自备优先）→ 无则用预置 → 出稿 |
+| 05 | **交付** | 线框图 / 高保真原型 / 评审报告 |
 
-## Questioning philosophy
+## 提问哲学（四种）
 
-The question bank is raw material. Four philosophies make questioning exhaustive:
+- **苏格拉底式追问**——从答案反推前提，挖出你没说出口的假设。*「你希望参数独立，是因为切换模式时不应该隐藏水位信息？」*
+- **对抗式审查**——替你找茬。*「一个完全不懂的用户能找到这个入口吗？」*
+- **交互断点扫描**——拆任务路径找卡点：找不到入口 / 看不到状态 / 无法撤销。
+- **友好性检查**——可撤销、防误触、100ms 内反馈、命名一致、渐进披露。
 
-- **Socratic probing** — derive hidden assumptions from answers. *"You want telemetry independent because switching modes shouldn't hide the water level?"*
-- **Adversarial review** — find the flaws on the user's behalf. *"Could a brand-new user find this entry point?"*
-- **Breakpoint scan** — walk the task path step by step looking for stalls: can't find entry, can't see state, can't undo.
-- **Friendliness check** — undo, mis-tap protection, feedback within 100ms, naming consistency, progressive disclosure.
+理论依据：Nielsen 10 大可用性启发式、Hick 定律、Fitts 定律、心智模型。
 
-Grounded in Nielsen's 10 usability heuristics, Hick's law, Fitts's law, and mental-model design.
+## 设计 Token（可替换）
 
-## Repository layout
+每次进入设计前，AI 会先问：**「你有自己的设计 token 吗？」**
+
+- **有** → 上传你的 token（粘贴值 / 上传文件 / 提供品牌官网），AI 全量替换并校验 WCAG 对比度
+- **没有** → 使用预置 token（`references/design-tokens.md`：森林绿 + 骨白 + 琥珀，大留白，深浅双主题）
+
+## 适配主流 AI Agent
+
+本技能不绑定单一工具，`AGENTS.md` 提供各平台接入方式：
+
+| Agent | 接入 |
+|---|---|
+| Hermes Agent | 复制到 `~/.hermes/skills/`，工具自动发现 |
+| Cursor | `.cursor/rules/pm-prototype.mdc` 引用 AGENTS.md |
+| Claude Code | `CLAUDE.md` 追加引用 |
+| Codex / Cline | 读 AGENTS.md 或复制到项目根目录 |
+
+## 仓库结构
 
 ```
-├── SKILL.md                      # The working protocol (Hermes skill format)
+├── SKILL.md                      # 主协议（Hermes skill 格式，通用协议见 AGENTS.md）
+├── AGENTS.md                     # 主流 AI Agent 接入层（Cursor/Claude Code/Codex/Cline）
 ├── references/
-│   └── 问题库全表.md             # Full question bank: 60+ questions across A-F scenarios,
-│                                 # adversarial checklist, breakpoint scan, Socratic templates
+│   ├── 问题库全表.md             # 完整问题库：60+ 问 + 对抗式/断点/友好性清单 + 苏格拉底句式
+│   └── design-tokens.md          # 预置设计 token（用户可上传自定义 token 覆盖）
 ├── docs/
-│   └── 使用说明.md               # Distributable usage guide (Chinese) with placeholder table
+│   └── 使用说明.md               # 可分发使用说明（含占位符表）
 ├── assets/
-│   └── hero.png                  # README banner
+│   └── hero.png                  # README 横幅
 └── README.md
 ```
 
-## Install (Hermes Agent)
+## 安装（Hermes Agent）
 
 ```bash
 cp -r pm-prototype-skill ~/.hermes/skills/product-management/
 hermes skills list | grep prototype
 ```
 
-Companion skills: `maygrove-design-system` (design tokens), `mastergo-mcp-handoff` (read MasterGo design files via MCP), `maygrove-wireframe` (editable wireframes).
+## 使用示例
 
-## Usage example
+> 「这个 MasterGo 链接的设计稿，我想优化模式切换交互，出个高保真原型」
 
-> "Here's a MasterGo link — I want to improve the mode-switching interaction, deliver a hi-fi prototype."
-
-The agent will: read the design DSL via MCP → restate the page structure → ask one clarifying question at a time (mode hierarchy? does telemetry change with mode? how discoverable must the entry be?) → confirm → load design tokens → ship an interactive HTML prototype.
+AI 会：通过 MCP 读取设计稿 DSL → 复述页面结构 → 一次一问（模式是并列还是嵌套？参数随模式变吗？入口要多显眼？）→ 确认 → 问设计 token → 输出可交互 HTML 原型。
 
 ## License
 
