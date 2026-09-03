@@ -4,7 +4,7 @@
 
 <div align="center">
 
-![version](https://img.shields.io/badge/version-v1.3.0-0B1E19?style=flat-square)
+![version](https://img.shields.io/badge/version-v1.4.0-0B1E19?style=flat-square)
 ![license](https://img.shields.io/badge/license-MIT-5CE6A5?style=flat-square)
 ![platform](https://img.shields.io/badge/platform-AI%20Agent-FFB454?style=flat-square)
 ![docs](https://img.shields.io/badge/docs-中文-7DB9FF?style=flat-square)

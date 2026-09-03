@@ -1,14 +1,14 @@
 ---
 name: pm-prototype-skill
 description: "Use when 交互原型/页面设计需求。强制先多轮澄清理解再出稿，默认欧美 App 风格。"
-version: 1.3.0
+version: 1.4.0
 author: Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
 metadata:
   hermes:
     tags: [原型, 交互设计, prototype, 产品经理, 澄清, 多轮问答]
-    related_skills: [maygrove-design-system, mastergo-mcp-handoff, maygrove-wireframe, design-md]
+    related_skills: [maygrove-design-system, mastergo-mcp-handoff, maygrove-wireframe, design-md, ui-ux-pro-max]
 ---
 
 # PM-Prototype-Skill 交互原型设计工作流
@@ -92,6 +92,7 @@ metadata:
 - Hick 定律：选项越多决策越慢 → 一屏一个主操作
 - Fitts 定律：触控目标 ≥44pt，间距充足
 - 渐进披露：常用功能优先，高级功能藏入二级
+- **评审优先级（uix 视角）：Accessibility 与 Touch & Interaction 是 CRITICAL 级——先查对比度 4.5:1 / 键盘可达 / 焦点可见，再查触控 44pt / 8px 间距 / 加载反馈，最后才看风格与动效**
 
 ## 4. 澄清节奏（用户偏好，必须遵守）
 
@@ -114,7 +115,7 @@ metadata:
    - L2 高保真可交互原型：HTML（token 落地、深浅双主题、英文/中文按用户、全状态）
    - L3 交互评审报告：问题清单 + 建议（不改稿）
 3. **交付物规范**：中文文件名、`hermes_delivery/`、可部署 Pages（krisays2 子目录 + publish.yaml cp 行 + 根 index.html 卡片 + curl 200 验证）。
-4. **验证**：交互用浏览器事件派发实测（点击/跳转/Toast/状态切换）；深浅模式渲染；无 AI slop（禁 em-dash/emoji 图标滥用/紫渐变）。
+4. **验证**：交互用浏览器事件派发实测（点击/跳转/Toast/状态切换）；深浅模式渲染；无 AI slop（禁 em-dash/emoji 图标滥用/紫渐变）。**交付前逐项过 `references/交付前质量检查表.md`（含无障碍/触控/深浅主题实测），全部勾完才算交付。**
 
 ## 5.1 已有实现 vs 设计稿对齐模式（回滚/修正）
 
