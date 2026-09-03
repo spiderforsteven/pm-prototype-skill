@@ -4,7 +4,7 @@
 
 <div align="center">
 
-![version](https://img.shields.io/badge/version-v1.1.0-0B1E19?style=flat-square)
+![version](https://img.shields.io/badge/version-v1.2.0-0B1E19?style=flat-square)
 ![license](https://img.shields.io/badge/license-MIT-5CE6A5?style=flat-square)
 ![platform](https://img.shields.io/badge/platform-AI%20Agent-FFB454?style=flat-square)
 ![docs](https://img.shields.io/badge/docs-中文-7DB9FF?style=flat-square)
@@ -56,7 +56,7 @@ LLM 驱动的原型设计，失败往往出在**理解阶段**，而不是渲染
 每次进入设计前，AI 会先问：**「你有自己的设计 token 吗？」**
 
 - **有** → 上传你的 token（粘贴值 / 上传文件 / 提供品牌官网），AI 全量替换并校验 WCAG 对比度
-- **没有** → 使用预置 token（`references/design-tokens.md`：森林绿 + 骨白 + 琥珀，大留白，深浅双主题）
+- **没有** → 使用预置 token（`references/design-tokens.md`：欧美 App 通用默认——Apple HIG/Uber/BirdBuddy 基线，中性灰阶 + 占位系统蓝 + 系统语义色 + 深浅双主题）
 
 ## 适配主流 AI Agent
 
